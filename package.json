@@ -6,8 +6,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --hot src/index.ts",
     "build": "bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+    "dev": "bun --hot src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
     "biome:check": "bunx biome check ./src ./tests --error-on-warnings",
     "biome:write": "bunx biome check --write ./src ./tests",
