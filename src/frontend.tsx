@@ -5,9 +5,11 @@
  * It is included in `src/index.html`.
  */
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { App } from "./App";
+import { BrowserRouter } from "react-router";
+import { AppRoutes } from "./routes";
 
 const elem = document.getElementById("root");
 
@@ -17,7 +19,11 @@ if (!elem) {
 
 const app = (
   <StrictMode>
-    <App />
+    <QueryClientProvider client={createQueryClient()}>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>
 );
 
@@ -34,4 +40,9 @@ if (import.meta.hot) {
 } else {
   // The hot module reloading API is not available in production.
   createRoot(elem).render(app);
+}
+
+function createQueryClient() {
+  const queryClient = new QueryClient();
+  return queryClient;
 }
