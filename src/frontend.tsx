@@ -10,6 +10,7 @@ import { StrictMode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import { AppRoutes } from "./routes";
+import queryClient from "./services/query-client";
 
 const elem = document.getElementById("root");
 
@@ -19,7 +20,7 @@ if (!elem) {
 
 const app = (
   <StrictMode>
-    <QueryClientProvider client={createQueryClient()}>
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
@@ -40,9 +41,4 @@ if (import.meta.hot) {
 } else {
   // The hot module reloading API is not available in production.
   createRoot(elem).render(app);
-}
-
-function createQueryClient() {
-  const queryClient = new QueryClient();
-  return queryClient;
 }
