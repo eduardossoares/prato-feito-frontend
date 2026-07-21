@@ -5,9 +5,13 @@
  * It is included in `src/index.html`.
  */
 
+import { QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { App } from "./App";
+import { BrowserRouter } from "react-router";
+import { AppRoutes } from "./routes";
+import queryClient from "./services/query-client";
+import "../public/output.css";
 
 const elem = document.getElementById("root");
 
@@ -17,7 +21,11 @@ if (!elem) {
 
 const app = (
   <StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>
 );
 
