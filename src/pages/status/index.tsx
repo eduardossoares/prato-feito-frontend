@@ -1,51 +1,44 @@
 import { CheckIcon, WarningIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useServerStatusQuery } from "@/hooks/use-server-status-query";
 import { cn } from "@/utils/cn";
-import { Skeleton } from "@/components/ui/skeleton";
-
-type UnitTime = {
-  limit: number;
-  duration: number;
-  label: "min" | "h" | "d";
-};
-
-const units: UnitTime[] = [
-  {
-    label: "min",
-    duration: 60_000,
-    limit: 60 * 60_000,
-  },
-  {
-    label: "h",
-    duration: 60 * 60_000,
-    limit: 24 * 60 * 60_000,
-  },
-  {
-    label: "d",
-    duration: 24 * 60 * 60_000,
-    limit: 30 * 24 * 60 * 60_000,
-  },
-];
+import { useEffect, useState } from "react";
 
 export function StatusPage() {
+  const [nowTimestamp, setNowTimestamp] = useState<number>(Date.now());
   const { isSuccess, isError, isLoading, refetch, dataUpdatedAt } =
     useServerStatusQuery();
 
-  function handleUpdatedAtCalc() {
-    const nowTimestamp = Date.now();
-    const updatedDateTimestamp = new Date(dataUpdatedAt).getTime();
-    const difference = nowTimestamp - updatedDateTimestamp;
+  function handleLastUpdate() {
+    const difference = Math.abs(nowTimestamp - dataUpdatedAt);
+    const validDataUpdatedAt = Number(dataUpdatedAt);
+    if (Number.isNaN(validDataUpdatedAt) || difference < 0)
+      return "data inválida";
 
-    if (difference < 60_000) return "agora";
+    if (difference < 60000) return "agora";
 
-    const unit = units.find((u) => difference < u.limit) ?? null;
-    if (!unit) return "unidade não definida";
-    const amount = Math.floor(difference / unit?.duration);
-    const formatted = `${amount}${unit.label}`;
-    return difference >= 0 ? `em ${formatted}` : `há ${formatted}`;
+    if (difference < 60 * 60000)
+      return `há ${Math.floor(difference / 60000)}min`;
+
+    if (difference < 24 * 60 * 60000)
+      return `há ${Math.floor(difference / (60 * 60000))}h`;
+
+    return `há ${Math.floor(difference / (24 * 60 * 60000))}d`;
   }
+
+  function handleRefetch() {
+    setNowTimestamp(Date.now());
+    refetch();
+  }
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setNowTimestamp(Date.now());
+    }, 60000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="bg-background h-screen flex justify-center pt-12">
@@ -171,12 +164,17 @@ export function StatusPage() {
           </div>
 
           <div className="flex items-center justify-between mt-6">
-            <span className="text-foreground-muted text-sm">
-              Última alteração: {handleUpdatedAtCalc()}
+            <span className="text-foreground-muted text-sm flex items-center gap-x-2">
+              Última alteração:{" "}
+              {isLoading ? (
+                <Skeleton className="w-16 h-6 bg-foreground-muted/10" />
+              ) : (
+                handleLastUpdate()
+              )}
             </span>
             <Button
               disabled={isLoading}
-              onClick={() => refetch()}
+              onClick={handleRefetch}
               variant={"outline"}
               className={"w-48 font-semibold hover:bg-black/5"}
             >
