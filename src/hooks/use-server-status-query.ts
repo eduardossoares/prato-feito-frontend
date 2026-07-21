@@ -14,7 +14,6 @@ interface UseServerStatusQueryResponse {
 
 export function useServerStatusQuery() {
   return useQuery<UseServerStatusQueryResponse>({
-    refetchInterval: 1000,
     queryKey: ["server-status"],
     queryFn: async () => {
       const response = await api.get("/status");
