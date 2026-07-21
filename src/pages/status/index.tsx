@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useMetadata } from "@/hooks/use-metadata";
 import { useServerStatusQuery } from "@/hooks/use-server-status-query";
 import { cn } from "@/utils/cn";
 
 export function StatusPage() {
+  useMetadata("Página de Status");
   const [nowTimestamp, setNowTimestamp] = useState<number>(Date.now());
   const { isSuccess, isError, isLoading, refetch, dataUpdatedAt } =
     useServerStatusQuery();
