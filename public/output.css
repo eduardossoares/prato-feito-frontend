@@ -208,17 +208,20 @@
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
   }
-  .mt-12 {
-    margin-top: calc(var(--spacing) * 12);
+  .mt-8 {
+    margin-top: calc(var(--spacing) * 8);
   }
-  .mt-28 {
-    margin-top: calc(var(--spacing) * 28);
+  .mt-16 {
+    margin-top: calc(var(--spacing) * 16);
   }
   .flex {
     display: flex;
   }
   .inline-flex {
     display: inline-flex;
+  }
+  .table {
+    display: table;
   }
   .size-6 {
     width: calc(var(--spacing) * 6);
@@ -251,14 +254,11 @@
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
-  .h-28 {
-    height: calc(var(--spacing) * 28);
-  }
   .h-px {
     height: 1px;
   }
-  .h-screen {
-    height: 100vh;
+  .min-h-screen {
+    min-height: 100vh;
   }
   .w-7 {
     width: calc(var(--spacing) * 7);
@@ -272,23 +272,26 @@
   .w-32 {
     width: calc(var(--spacing) * 32);
   }
-  .w-48 {
-    width: calc(var(--spacing) * 48);
-  }
-  .w-96 {
-    width: calc(var(--spacing) * 96);
-  }
-  .w-125 {
-    width: calc(var(--spacing) * 125);
-  }
   .w-full {
     width: 100%;
   }
   .max-w-2xl {
     max-width: var(--container-2xl);
   }
+  .max-w-full {
+    max-width: 100%;
+  }
+  .min-w-0 {
+    min-width: 0px;
+  }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
   .shrink-0 {
     flex-shrink: 0;
+  }
+  .border-collapse {
+    border-collapse: collapse;
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -299,14 +302,17 @@
   .cursor-pointer {
     cursor: pointer;
   }
+  .resize {
+    resize: both;
+  }
   .flex-col {
     flex-direction: column;
   }
   .items-center {
     align-items: center;
   }
-  .justify-between {
-    justify-content: space-between;
+  .items-start {
+    align-items: flex-start;
   }
   .justify-center {
     justify-content: center;
@@ -317,6 +323,12 @@
   .gap-1\.5 {
     gap: calc(var(--spacing) * 1.5);
   }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
   :where(.space-y-4 > :not(:last-child)) {
     --tw-space-y-reverse: 0;
     margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
@@ -324,9 +336,6 @@
   }
   .gap-x-2 {
     column-gap: calc(var(--spacing) * 2);
-  }
-  .gap-x-4 {
-    column-gap: calc(var(--spacing) * 4);
   }
   .gap-y-1 {
     row-gap: var(--spacing);
@@ -374,6 +383,9 @@
       background-color: color-mix(in oklab, var(--color-danger) 60%, transparent);
     }
   }
+  .bg-foreground-muted {
+    background-color: var(--color-foreground-muted);
+  }
   .bg-foreground-muted\/10 {
     background-color: color-mix(in srgb, #686a60 10%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -407,14 +419,20 @@
   .bg-clip-padding {
     background-clip: padding-box;
   }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
+  }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
   .px-2\.5 {
     padding-inline: calc(var(--spacing) * 2.5);
   }
-  .px-6 {
-    padding-inline: calc(var(--spacing) * 6);
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .px-5 {
+    padding-inline: calc(var(--spacing) * 5);
   }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
@@ -422,8 +440,8 @@
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
   }
-  .pt-12 {
-    padding-top: calc(var(--spacing) * 12);
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
   }
   .font-sans {
     font-family: var(--font-sans);
@@ -505,12 +523,19 @@
   .italic {
     font-style: italic;
   }
+  .underline {
+    text-decoration-line: underline;
+  }
   .underline-offset-4 {
     text-underline-offset: 4px;
   }
   .shadow-sm\/5 {
     --tw-shadow-alpha: 5%;
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, oklab(from rgb(0 0 0 / 0.1) l a b / 5%)), 0 1px 2px -1px var(--tw-shadow-color, oklab(from rgb(0 0 0 / 0.1) l a b / 5%));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-sm {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .outline {
@@ -612,6 +637,41 @@
   }
   .data-vertical\:self-stretch[data-vertical] {
     align-self: stretch;
+  }
+  @media (width >= 40rem) {
+    .sm\:mt-12 {
+      margin-top: calc(var(--spacing) * 12);
+    }
+    .sm\:mt-28 {
+      margin-top: calc(var(--spacing) * 28);
+    }
+    .sm\:min-h-28 {
+      min-height: calc(var(--spacing) * 28);
+    }
+    .sm\:w-48 {
+      width: calc(var(--spacing) * 48);
+    }
+    .sm\:w-96 {
+      width: calc(var(--spacing) * 96);
+    }
+    .sm\:w-\[31\.25rem\] {
+      width: 31.25rem;
+    }
+    .sm\:flex-row {
+      flex-direction: row;
+    }
+    .sm\:items-center {
+      align-items: center;
+    }
+    .sm\:justify-between {
+      justify-content: space-between;
+    }
+    .sm\:px-6 {
+      padding-inline: calc(var(--spacing) * 6);
+    }
+    .sm\:pt-12 {
+      padding-top: calc(var(--spacing) * 12);
+    }
   }
   .\[\&_svg\]\:pointer-events-none svg {
     pointer-events: none;

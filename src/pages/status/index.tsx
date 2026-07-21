@@ -1,10 +1,10 @@
 import { CheckIcon, WarningIcon } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useServerStatusQuery } from "@/hooks/use-server-status-query";
 import { cn } from "@/utils/cn";
-import { useEffect, useState } from "react";
 
 export function StatusPage() {
   const [nowTimestamp, setNowTimestamp] = useState<number>(Date.now());
@@ -41,14 +41,14 @@ export function StatusPage() {
   }, []);
 
   return (
-    <div className="bg-background h-screen flex justify-center pt-12">
+    <div className="bg-background min-h-screen flex justify-center px-4 py-8 sm:px-6 sm:pt-12">
       <div className="max-w-2xl w-full">
         <span className="font-medium font-serif italic text-xl text-foreground">
           prato feito<span className="text-accent text-2xl">.</span>
         </span>
 
-        <div className="mt-12 space-y-4">
-          <div className="bg-surface border border-border rounded-2xl flex items-center shadow-sm/5 h-28 gap-x-4 px-6">
+        <div className="mt-8 space-y-4 sm:mt-12">
+          <div className="bg-surface border border-border rounded-2xl flex flex-col items-start shadow-sm/5 gap-4 p-5 sm:min-h-28 sm:flex-row sm:items-center sm:px-6">
             {isLoading ? (
               <Skeleton className="w-12 h-12 bg-foreground-muted/10" />
             ) : (
@@ -84,10 +84,10 @@ export function StatusPage() {
                 </div>
               </div>
             )}
-            <div className="flex flex-col gap-y-1">
+            <div className="flex flex-col gap-y-1 min-w-0">
               <h1 className="font-serif font-medium text-xl text-foreground">
                 {isLoading ? (
-                  <Skeleton className="w-96 h-6 bg-foreground-muted/10" />
+                  <Skeleton className="h-6 w-full max-w-full bg-foreground-muted/10 sm:w-96" />
                 ) : (
                   <>
                     {isSuccess && "Todos os sistemas estão operacionais"}
@@ -97,7 +97,7 @@ export function StatusPage() {
               </h1>
               <span className="text-foreground-muted">
                 {isLoading ? (
-                  <Skeleton className="w-125 h-6 bg-foreground-muted/10" />
+                  <Skeleton className="h-6 w-full max-w-full bg-foreground-muted/10 sm:w-[31.25rem]" />
                 ) : (
                   <>
                     {isSuccess &&
@@ -110,7 +110,7 @@ export function StatusPage() {
           </div>
 
           <div className="bg-surface border border-border rounded-2xl shadow-sm/5">
-            <div className="flex items-center justify-between py-4 px-6">
+            <div className="flex flex-col gap-3 py-4 px-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
               <div className="flex flex-col ">
                 <h2 className="font-bold text-foreground">Aplicação</h2>
                 <span className="text-foreground-muted text-sm">
@@ -125,7 +125,7 @@ export function StatusPage() {
                 )}
               >
                 {isLoading ? (
-                  <Skeleton className="w-32 h-12 bg-foreground-muted/10" />
+                  <Skeleton className="h-6 w-32 bg-foreground-muted/10" />
                 ) : (
                   <>
                     {isSuccess && "Operacional"}
@@ -137,7 +137,7 @@ export function StatusPage() {
 
             <Separator className={"h-px"} />
 
-            <div className="flex items-center justify-between py-4 px-6">
+            <div className="flex flex-col gap-3 py-4 px-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
               <div className="flex flex-col ">
                 <h2 className="font-bold text-foreground">Banco de dados</h2>
                 <span className="text-foreground-muted text-sm">
@@ -152,7 +152,7 @@ export function StatusPage() {
                 )}
               >
                 {isLoading ? (
-                  <Skeleton className="w-32 h-12 bg-foreground-muted/10" />
+                  <Skeleton className="h-6 w-32 bg-foreground-muted/10" />
                 ) : (
                   <>
                     {isSuccess && "Operacional"}
@@ -163,7 +163,7 @@ export function StatusPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between mt-6">
+          <div className="flex flex-col gap-4 mt-6 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-foreground-muted text-sm flex items-center gap-x-2">
               Última alteração:{" "}
               {isLoading ? (
@@ -176,14 +176,14 @@ export function StatusPage() {
               disabled={isLoading}
               onClick={handleRefetch}
               variant={"outline"}
-              className={"w-48 font-semibold hover:bg-black/5"}
+              className={"w-full font-semibold hover:bg-black/5 sm:w-48"}
             >
               Verificar novamente
             </Button>
           </div>
         </div>
 
-        <div className="text-foreground-muted flex gap-x-2 text-sm justify-center mt-28">
+        <div className="text-foreground-muted flex gap-x-2 text-sm justify-center mt-16 sm:mt-28">
           <span>
             prato feito
             <span className="text-accent">.</span>
