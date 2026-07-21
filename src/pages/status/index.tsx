@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useMetadata } from "@/hooks/use-metadata";
 import { useServerStatusQuery } from "@/hooks/use-server-status-query";
 import { cn } from "@/utils/cn";
-import { useMetadata } from "@/hooks/use-metadata";
 
 export function StatusPage() {
   useMetadata("Página de Status");
